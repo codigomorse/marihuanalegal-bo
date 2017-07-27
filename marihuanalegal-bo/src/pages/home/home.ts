@@ -28,10 +28,10 @@ export class Home {
        }else{
         this.profile.picture = "http://via.placeholder.com/140x100"; 
        }
-       this.toast.create({
-         message: "Welcome to Walkmydog "+data.email,
-         duration: 3000
-       }).present();
+      //  this.toast.create({
+      //    message: "Welcome to Marihuana Legal "+data.email,
+      //    duration: 3000
+      //  }).present();
        //console.log(this.profileData);
        console.log(this.user);
      });
@@ -50,15 +50,15 @@ export class Home {
       })
       alert.present();
   }
-  saveProfile(){
-    if(null != this.profile.username){
-      this.afAuth.authState.take(1).subscribe(auth => {
-        this.afDb.object(`users/${auth.uid}`).set(this.profile).then(() => alert("Datos actualizados correctamente")); this.profileDetails = false;;
-      })
-    }else{
-      alert("el nombre de usuario no puede estar vacio");
-    }
-  }  
+  // saveProfile(){
+  //   if(null != this.profile.username){
+  //     this.afAuth.authState.take(1).subscribe(auth => {
+  //       this.afDb.object(`users/${auth.uid}`).set(this.profile).then(() => alert("Datos actualizados correctamente")); this.profileDetails = false;;
+  //     })
+  //   }else{
+  //     alert("el nombre de usuario no puede estar vacio");
+  //   }
+  // }  
   exitApp(){
     firebase.auth().signOut();
     this.platform.exitApp();

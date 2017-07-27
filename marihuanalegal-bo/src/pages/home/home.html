@@ -14,21 +14,22 @@
 
 
 <ion-content padding>
-<div *ngIf="profileDetails">
-  <img [src]="profile.picture">
+<div >
   <br>
   <ion-item>
-    <ion-label floating>Username</ion-label>
-    <ion-input [(ngModel)]="profile.username"></ion-input>
+    <p>Bienvenido {{user.email}}</p>
   </ion-item>
   <br>
+<ion-item>
+  <ion-label>Marihuana en stock</ion-label>
+  <ion-checkbox color="secondary" checked="true"></ion-checkbox>
+</ion-item>
   
   <!--<ion-item>
     <ion-label floating>email</ion-label>
     <ion-input [(ngModel)]="profile.email"></ion-input>
   </ion-item>
   -->
-  <button ion-button clear block (click)="saveProfile()">Save Profile</button>
 </div>
   
   <button ion-button block (click)="logoutUser()">Log out</button> 
