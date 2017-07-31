@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController,Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController,Platform } from 'ionic-angular';
 import firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Profile } from '../../models/profile';
@@ -15,26 +15,18 @@ export class Home {
   profileData: FirebaseObjectObservable<Profile>;
   user={};
   profile = {} as Profile;
-  profileDetails = true;
-  constructor(private afDb: AngularFireDatabase,private toast: ToastController,private afAuth:AngularFireAuth,public alert: AlertController,public platform: Platform,public navCtrl: NavController, public navParams: NavParams) {
+  farmaciaMenu = true;
+  adminMenu = false;
+  constructor(private afDb: AngularFireDatabase,private afAuth:AngularFireAuth,public alert: AlertController,public platform: Platform,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     this.afAuth.authState.subscribe(data => {
-       this.user = data;
-       this.profileData = this.afDb.object(`users/${data.uid}`);
-       if(null != data.photoURL){
-        this.profile.picture = data.photoURL;
-       }else{
-        this.profile.picture = "http://via.placeholder.com/140x100"; 
-       }
-      //  this.toast.create({
-      //    message: "Welcome to Marihuana Legal "+data.email,
-      //    duration: 3000
-      //  }).present();
-       //console.log(this.profileData);
-       console.log(this.user);
+      this.user = data;  
      });
+    this.afDb.list("/stock/").subscribe(_data => {
+      this.profile = _data[0];
+    });
   }
   logoutUser(){
         let alert = this.alert.create({
@@ -50,17 +42,16 @@ export class Home {
       })
       alert.present();
   }
-  // saveProfile(){
-  //   if(null != this.profile.username){
-  //     this.afAuth.authState.take(1).subscribe(auth => {
-  //       this.afDb.object(`users/${auth.uid}`).set(this.profile).then(() => alert("Datos actualizados correctamente")); this.profileDetails = false;;
-  //     })
-  //   }else{
-  //     alert("el nombre de usuario no puede estar vacio");
-  //   }
-  // }  
+  updateStock(){
+      this.afAuth.authState.take(1).subscribe(auth => {
+        this.afDb.object(`stock/${auth.uid}`).set(this.profile).then(() => alert("Datos actualizados correctamente"));
+      })
+   }  
   exitApp(){
     firebase.auth().signOut();
     this.platform.exitApp();
+  }
+  goUsers(){
+    this.navCtrl.push('UsersPage');
   }
 }

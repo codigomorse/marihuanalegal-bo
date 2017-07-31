@@ -1,7 +1,8 @@
 export interface Profile{
     username: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-    picture: string;
+    stock: boolean;
+    farmacia: string;
+    latitud: string;
+    longitud: string;
+    horario: string;
 }

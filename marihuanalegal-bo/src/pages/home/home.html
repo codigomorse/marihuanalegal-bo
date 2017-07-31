@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>home</ion-title>
+    <ion-title>Farmacia {{profile.farmacia}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,22 +15,14 @@
 
 <ion-content padding>
 <div >
-  <br>
-  <ion-item>
-    <p>Bienvenido {{user.email}}</p>
-  </ion-item>
-  <br>
-<ion-item>
-  <ion-label>Marihuana en stock</ion-label>
-  <ion-checkbox color="secondary" checked="true"></ion-checkbox>
-</ion-item>
-  
-  <!--<ion-item>
-    <ion-label floating>email</ion-label>
-    <ion-input [(ngModel)]="profile.email"></ion-input>
-  </ion-item>
-  -->
-</div>
-  
+  <div *ngIf="farmaciaMenu">
+    <ion-label>Marihuana en stock</ion-label>
+    <ion-checkbox [(ngModel)]="profile.stock" color="secondary" (ionChange)="updateStock()" id="stock"></ion-checkbox>
+  </div>
+  <div *ngIf="adminMenu">
+    <button ion-button block color="danger" (click)="goUsers()">Crear usuarios</button>
+    <button ion-button block color="secondary" (click)="logoutUser()">Crear farmacias</button>
+  </div>
+</div> 
   <button ion-button block (click)="logoutUser()">Log out</button> 
 </ion-content>
