@@ -22,11 +22,14 @@ export class Home {
 
   ionViewDidLoad() {
     this.afAuth.authState.subscribe(data => {
-      this.user = data;  
+      this.user = data;
+      console.log(this.user);
+        this.afDb.object(`/stock/${data.uid}`).subscribe(_data => {
+          console.log(_data);
+          this.profile = _data;
+          console.log(this.profile);
+      });  
      });
-    this.afDb.list("/stock/").subscribe(_data => {
-      this.profile = _data[0];
-    });
   }
   logoutUser(){
         let alert = this.alert.create({
