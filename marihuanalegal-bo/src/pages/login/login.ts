@@ -24,8 +24,7 @@ user = {} as User;
 
   constructor(public loadingCtrl: LoadingController,public formBuilder: FormBuilder,public alertCtrl: AlertController, private afAuth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams) {
     this.loginForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required, 
-        EmailValidator.isValid])],
+      email: [''],
       password: ['', Validators.compose([Validators.minLength(6), 
         Validators.required])]
     });
