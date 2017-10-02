@@ -47,7 +47,8 @@ export class Home {
   }
   updateStock(){
       this.afAuth.authState.take(1).subscribe(auth => {
-        this.afDb.object(`stock/${auth.uid}`).set(this.profile).then(() => alert("Datos actualizados correctamente"));
+        this.afDb.object(`stock/${auth.uid}`).set(this.profile);
+        alert("Usuario actualizado correctamente");
       })
    }  
   exitApp(){
